@@ -9,4 +9,17 @@ before_install:
 
 #script section contains all the commands that needs to be executed
 script:
-  - docker run -e CI=true docker-react npm run test # 
+  - docker run -e CI=true docker-react npm run test 
+
+#to deploy our application in a hosting env
+deploy:
+  provider: elasticbeanstalk
+  region: "us-east-2"
+  app: "docker-react"
+  env: "Dockerreact-env"
+  bucket_name: "elasticbeanstalk-us-east-2-127919176286"
+  bucket_path: "docker-react"
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
