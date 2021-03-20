@@ -1,0 +1,12 @@
+language: generic 
+sudo: required
+services:
+  - docker
+
+#set of commands to be executed before the test runs
+before_install:
+  - docker build -t docker-react -f Dockerfile.dev .
+
+#script section contains all the commands that needs to be executed
+script:
+  - docker run -e CI=true docker-react npm run test # 
